@@ -3,18 +3,18 @@
 
 <PageTitle>Index</PageTitle>
 <table class="table table-striped">
- <thead>
-    <tr >
-        <th scope="col">Name</th>
-        <th scope="col">Actions</th>
-    </tr>
-    </thead>    
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
     <tbody>
-@foreach (var fileGroup in myFilesGroupedAndSorted)
-{
-    <Mp3Component FileGroup="fileGroup" />
-}
-</tbody>
+        @foreach (var fileGroup in myFilesGroupedAndSorted)
+        {
+            <Mp3Component FileGroup="fileGroup" />
+        }
+    </tbody>
 </table>
 @code {
     List<TextFile> myList = new List<TextFile>
