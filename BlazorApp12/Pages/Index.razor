@@ -1,0 +1,42 @@
+﻿@using Models
+@page "/"
+
+<PageTitle>Index</PageTitle>
+<table class="table table-striped">
+ <thead>
+    <tr >
+        <th scope="col">Name</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>    
+    <tbody>
+@foreach (var fileGroup in myFilesGroupedAndSorted)
+{
+    <Mp3Component FileGroup="fileGroup" />
+}
+</tbody>
+</table>
+@code {
+    List<TextFile> myList = new List<TextFile>
+    {
+        new TextFile { Name = "", Path = "some-path\\SomeFile1.txt", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile2.txt", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile3.txt", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile4.txt", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile5.txt", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile6.txt", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile1.mp3", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile2.mp3", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile3.mp3", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile5.mp3", Url = "" },
+        new TextFile { Name = "", Path = "some-path\\SomeFile6.mp3", Url = "" },
+    };
+
+
+    IEnumerable<IGrouping<string, TextFile>> myFilesGroupedAndSorted => myList.GroupBy(file => GetPathWithoutExtension(file.Path)).OrderBy(group => group.Key);
+
+    private string GetPathWithoutExtension(string path)
+    {
+        return System.IO.Path.ChangeExtension(path, null);
+    }
+}

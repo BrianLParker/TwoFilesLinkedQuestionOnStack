@@ -1,0 +1,25 @@
+﻿@using BlazorApp12.Models;
+<tr>
+    <td>
+        @FileGroup.Key
+    </td>
+    <td>
+        @if (Mp3 is not null)
+        {
+            <div>I have a MP3</div >
+        }
+        @if (Text is not null)
+        {
+             <div>I have a Txt</div>
+        }
+    </td>
+</tr>
+@code {
+    [Parameter]
+    public IGrouping<string, TextFile> FileGroup { get; set; } = default!;
+
+   
+
+    TextFile? Text => FileGroup.FirstOrDefault(file => Path.GetExtension(file.Path).ToLower() == ".mp3");
+    TextFile? Mp3 => FileGroup.FirstOrDefault(file => Path.GetExtension(file.Path).ToLower() == ".txt");
+}
